@@ -41,16 +41,11 @@ class Writer {
       return out;
     });
 
-    console.log(input);
-
-    // i = column; j = row;
     let row = 0;
     let column = 0;
 
     label1: for (let i = 0; i < input.length; i += 1) {
       label2: for (let j = 0; j < input[i].length; j += 1) {
-        console.log(input[i][j]);
-        console.log(row, column);
 
         if (input[i][j].length === 0) {
           this.output.value += this.enter;
@@ -83,7 +78,6 @@ class Writer {
         this.output.value += this.tab;
 
         if (column === 1) {
-          // endHour = Final hour; startHour = Start hour;
           const endHour = this.cashier.endHour;
 
           let startHour = endHour - 1;
@@ -99,8 +93,6 @@ class Writer {
         this.output.value += this.tab;
 
         const value = input[i][j].match(/(\d+)([а-я]*)/i);
-        console.log(value);
-
         const count = parseInt(value[1]);
         let item = this.items[value[2]];
 
@@ -117,8 +109,6 @@ class Writer {
   }
 
   copy() {
-    // this.output.select();
-    // this.output.setSelectionRange(0, 99999);
     navigator.clipboard.writeText(this.output.value).then(() => {
       alert('Copied to clipboard');
     });;
@@ -126,6 +116,8 @@ class Writer {
 }
 
 function init() {
+  document.querySelector('.main').style.height = `${document.documentElement.clientHeight}px`;
+
   const writer = new Writer();
   writer.init();
 }
